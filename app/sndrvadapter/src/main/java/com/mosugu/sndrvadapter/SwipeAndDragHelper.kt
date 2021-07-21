@@ -12,10 +12,12 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlin.math.roundToInt
 
 class SwipeAndDragHelper(private val adapter : SwipeAndDragAdapter) : ItemTouchHelper.Callback(){
+    private var dragFlags = ItemTouchHelper.UP or ItemTouchHelper.DOWN
+    var swipeFlags = ItemTouchHelper.LEFT
 
     override fun getMovementFlags(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder): Int {
-        val dragFlags = ItemTouchHelper.UP or ItemTouchHelper.DOWN
-        val swipeFlags = ItemTouchHelper.LEFT
+
+
         return makeMovementFlags(dragFlags, swipeFlags)
     }
 
@@ -75,6 +77,16 @@ class SwipeAndDragHelper(private val adapter : SwipeAndDragAdapter) : ItemTouchH
 
 
         super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+
+    }
+
+    fun setIsDragEnabled(enabled : Boolean) {
+        if(!enabled) dragFlags = 0
+
+    }
+
+    fun setIsSwipeEnabled(enabled: Boolean) {
+        if(!enabled) swipeFlags = 0
 
     }
 }

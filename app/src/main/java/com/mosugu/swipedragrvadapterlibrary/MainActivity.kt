@@ -15,8 +15,10 @@ class MainActivity : AppCompatActivity() {
         val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
 
         val rvAdapter = RvAdapter(initDataLIst())
-
-        ItemTouchHelper(SwipeAndDragHelper(rvAdapter)).attachToRecyclerView(binding.rv)
+        val swipeAndDragHelper = SwipeAndDragHelper(rvAdapter)
+//        swipeAndDragHelper.setIsDragEnabled(false)
+//        swipeAndDragHelper.setIsSwipeEnabled(false)
+        ItemTouchHelper(swipeAndDragHelper).attachToRecyclerView(binding.rv)
 
 
 
