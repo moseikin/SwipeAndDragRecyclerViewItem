@@ -3,13 +3,15 @@ package com.mosugu.sndrvadapter
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Rect
+import android.view.MotionEvent
+import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import kotlin.math.roundToInt
 
-class SwipeAndDragHelper(private val adapter : SwipeAndDragAdapter) : ItemTouchHelper.Callback() {
+class SwipeAndDragHelper(private val adapter : SwipeAndDragAdapter) : ItemTouchHelper.Callback(){
 
     override fun getMovementFlags(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder): Int {
         val dragFlags = ItemTouchHelper.UP or ItemTouchHelper.DOWN
@@ -26,6 +28,7 @@ class SwipeAndDragHelper(private val adapter : SwipeAndDragAdapter) : ItemTouchH
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
         adapter.onItemSwiped(viewHolder.adapterPosition)
     }
+
 
     override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
         super.onSelectedChanged(viewHolder, actionState)
@@ -56,10 +59,15 @@ class SwipeAndDragHelper(private val adapter : SwipeAndDragAdapter) : ItemTouchH
         if (trashIcon != null) {
 
             trashIcon.bounds  = Rect(
-                viewHolder.itemView.right - (viewHolder.itemView.bottom - viewHolder.itemView.top) - textMargin,
-                     viewHolder.itemView.top,
+                viewHolder.itemView.right - 48 - textMargin,
+                viewHolder.itemView.top + viewHolder.itemView.height / 2 - 24,
                 viewHolder.itemView.right - textMargin,
-                     viewHolder.itemView.bottom
+                viewHolder.itemView.bottom - viewHolder.itemView.height / 2 + 24
+
+//                viewHolder.itemView.right - (viewHolder.itemView.bottom - viewHolder.itemView.top) - textMargin,
+//                     viewHolder.itemView.top,
+//                viewHolder.itemView.right - textMargin,
+//                     viewHolder.itemView.bottom
             )
 
             trashIcon.draw(c)

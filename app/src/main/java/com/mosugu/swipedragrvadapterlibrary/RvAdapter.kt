@@ -35,6 +35,7 @@ class RvAdapter(private val dataList : MutableList<String>) : RecyclerView.Adapt
         notifyItemMoved(fromPosition, toPosition)
     }
 
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.tvItem.text = dataList[position]
     }
